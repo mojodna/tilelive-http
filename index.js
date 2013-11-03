@@ -60,6 +60,8 @@ HttpSource.prototype.getInfo = function(callback) {
 };
 
 HttpSource.prototype.close = function(callback) {
+  callback = callback || function() {};
+
   return callback();
 };
 
