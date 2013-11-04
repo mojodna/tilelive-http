@@ -54,10 +54,7 @@ HttpSource.prototype.getTile = function(z, x, y, callback) {
 };
 
 HttpSource.prototype.getInfo = function(callback) {
-  var err = new Error("Not implemented.");
-  var data;
-
-  return callback(err, data);
+  return callback(new Error("HttpSource.getInfo() is not implemented."));
 };
 
 HttpSource.prototype.close = function(callback) {
