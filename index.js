@@ -13,7 +13,8 @@ var HttpSource = function(uri, callback) {
   return callback(null, this);
 };
 
-// TODO these are being fetched in sets of 4 duplicate requests
+// TODO these are being fetched in sets of 4 duplicate requests when used as
+// part of a CopyTask
 HttpSource.prototype.getTile = function(z, x, y, callback) {
   var tileUrl = this.source
     .replace(/{z}/i, z)
