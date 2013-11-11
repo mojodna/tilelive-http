@@ -23,8 +23,6 @@ HttpSource.prototype.getTile = function(z, x, y, callback) {
     "User-Agent": "tilelive-http/" + version
   };
 
-  console.log("Fetching %d/%d/%d", z, x, y);
-
   return request.get({
     uri: tileUrl,
     encoding: null,
