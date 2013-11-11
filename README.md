@@ -18,7 +18,7 @@ var scheme = tilelive.Scheme.create("scanline", {
 });
 
 var copyTask = new tilelive.CopyTask(template, "mbtiles://./watercolor-la.mbtiles", scheme);
-copyTask.formats = "tile";
+copyTask.formats = ["tile"];
 
 copyTask.start(function(err) {
   if (err) {
