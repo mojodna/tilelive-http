@@ -51,7 +51,7 @@ HttpSource.prototype.getTile = function(z, x, y, callback) {
 
 HttpSource.prototype.getInfo = function(callback) {
   return callback(null, {
-    format: this.source.split(".").pop(),
+    format: url.parse(this.source).pathname.split(".").pop(),
     bounds: [-180, -85.0511, 180, 85.0511],
     minzoom: 0,
     maxzoom: Infinity
