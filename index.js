@@ -50,7 +50,12 @@ HttpSource.prototype.getTile = function(z, x, y, callback) {
 };
 
 HttpSource.prototype.getInfo = function(callback) {
-  return callback(new Error("HttpSource.getInfo() is not implemented."));
+  return callback(null, {
+    format: this.source.split(".").pop(),
+    bounds: [-180, -85.0511, 180, 85.0511],
+    minzoom: 0,
+    maxzoom: Infinity
+  });
 };
 
 HttpSource.prototype.close = function(callback) {
