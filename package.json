@@ -1,6 +1,6 @@
 {
   "name": "tilelive-http",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HTTP source for tilelive",
   "main": "index.js",
   "author": "Seth Fitzsimmons <seth@mojodna.net>",
