@@ -66,6 +66,7 @@ HttpSource.prototype.close = function(callback) {
 
 HttpSource.registerProtocols = function(tilelive) {
   tilelive.protocols["http:"] = HttpSource;
+  tilelive.protocols["https:"] = HttpSource;
 };
 
 module.exports = HttpSource;
