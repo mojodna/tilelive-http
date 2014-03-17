@@ -41,7 +41,7 @@ HttpSource.prototype.getTile = function(z, x, y, callback) {
       return callback(null, body, rspHeaders);
 
     case 404:
-      return callback();
+      return callback(new Error('Tile does not exist'));
 
     default:
       return callback(new Error("Upstream error: " + rsp.statusCode));
