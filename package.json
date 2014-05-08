@@ -9,6 +9,7 @@
     "request": "^2.34.0"
   },
   "peerDependencies": {
-    "tilelive": "^4.5.3"
+    "tilelive": "^4.5.3",
+    "tilejson": "^0.6.3"
   }
 }

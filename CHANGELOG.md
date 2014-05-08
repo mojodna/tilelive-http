@@ -1,5 +1,9 @@
 # Changes
 
+## v0.2.1 - 5/7/14
+
+* Add `tilejson` as a peer dependency
+
 ## v0.2.0 - 5/7/14
 
 * Disambiguate between URL templates and TileJSON sources (deferring to
