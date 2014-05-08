@@ -1,5 +1,9 @@
 # Changes
 
+## v0.2.2 - 5/8/14
+
+* Point to the version of `tilejson` that registers for `tilejson+<proto>`
+
 ## v0.2.1 - 5/7/14
 
 * Add `tilejson` as a peer dependency

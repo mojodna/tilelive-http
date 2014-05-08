@@ -10,6 +10,6 @@
   },
   "peerDependencies": {
     "tilelive": "^4.5.3",
-    "tilejson": "^0.6.3"
+    "tilejson": "mojodna/node-tilejson#integration"
   }
 }
