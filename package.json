@@ -6,7 +6,7 @@
   "author": "Seth Fitzsimmons <seth@mojodna.net>",
   "license": "MIT",
   "dependencies": {
-    "request": "~2.27.0"
+    "request": "^2.34.0"
   },
   "peerDependencies": {
     "tilelive": "^4.5.3"
