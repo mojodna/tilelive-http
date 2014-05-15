@@ -24,7 +24,7 @@
 * Return an `Error` on 404s to match `tilelive.js` expectations (@gravitystorm)
 * Register for `tilejson+https:`
 
-## v0.1.1 - 12/19/14
+## v0.1.1 - 12/19/13
 
 * Implement `getInfo()` with sensible defaults
 * Correct `copyTask.formats` in the docs and examples (@vsivsi)
