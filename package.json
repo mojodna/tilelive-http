@@ -11,5 +11,14 @@
   "peerDependencies": {
     "tilelive": "^4.5.3",
     "tilejson": "^0.6.4"
-  }
+  },
+  "homepage": "https://github.com/mojodna/tilelive-http",
+  "bugs": "https://github.com/mojodna/tilelive-http/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mojodna/tilelive-http"
+  },
+  "files": [
+    "index.js"
+  ] 
 }
