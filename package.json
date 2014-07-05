@@ -10,7 +10,7 @@
   },
   "peerDependencies": {
     "tilelive": "^4.5.3",
-    "tilejson": "^0.6.4"
+    "tilejson": "^0.8.0"
   },
   "homepage": "https://github.com/mojodna/tilelive-http",
   "bugs": "https://github.com/mojodna/tilelive-http/issues",

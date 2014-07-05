@@ -1,5 +1,9 @@
 # Changes
 
+## v0.3.0 - 7/5/14
+
+* Update `tilejson` dependency to `^0.8.0'.
+
 ## v0.2.3 - 5/11/14
 
 * Depend on `tilejson@^0.6.4`, as upstream has picked up the protocol change.
