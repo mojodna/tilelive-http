@@ -2,7 +2,10 @@
 
 var http = require("http"),
     url = require("url");
-var request = require("request");
+
+var backoff = require("backoff"),
+    request = require("request");
+
 var version = require("./package.json").version;
 
 http.globalAgent.maxSockets = 100;
@@ -22,16 +25,7 @@ module.exports = function(tilelive, options) {
     return callback(null, this);
   };
 
-  HttpSource.prototype.getTile = function(z, x, y, callback) {
-    var tileUrl = this.source
-      .replace(/{z}/i, z)
-      .replace(/{x}/i, x)
-      .replace(/{y}/i, y);
-
-    var headers = {
-      "User-Agent": "tilelive-http/" + version
-    };
-
+  HttpSource.prototype._get = function(tileUrl, headers, callback) {
     return request.get({
       uri: tileUrl,
       encoding: null,
@@ -58,6 +52,25 @@ module.exports = function(tilelive, options) {
     });
   };
 
+  HttpSource.prototype.getTile = function(z, x, y, callback) {
+    var tileUrl = this.source
+      .replace(/{z}/i, z)
+      .replace(/{x}/i, x)
+      .replace(/{y}/i, y);
+
+    var headers = {
+      "User-Agent": "tilelive-http/" + version
+    };
+
+    var call = backoff.call(this._get, callback);
+    call.setStrategy(new backoff.FibonacciStrategy({
+      initialDelay: 1e3,
+      maxDelay: 60e3
+    }));
+    call.failAfter(10);
+    call.start();
+  };
+
   HttpSource.prototype.getInfo = function(callback) {
     return callback(null, {
       format: url.parse(this.source).pathname.split(".").pop(),
@@ -69,8 +82,6 @@ module.exports = function(tilelive, options) {
 
   HttpSource.prototype.close = function(callback) {
     callback = callback || function() {};
-
-    return callback();
   };
 
   HttpSource.registerProtocols = function(tilelive) {
