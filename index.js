@@ -2,7 +2,9 @@
 
 var http = require("http"),
     url = require("url");
+
 var request = require("request");
+
 var version = require("./package.json").version;
 
 http.globalAgent.maxSockets = Infinity;
