@@ -2,6 +2,7 @@
 
 ## vNext
 
+* Relax `tilelive` dependency
 * Add quadkey interpolation for `{q}`
 
 ## v0.3.0 - 7/5/14
