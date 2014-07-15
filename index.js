@@ -5,7 +5,7 @@ var http = require("http"),
 var request = require("request");
 var version = require("./package.json").version;
 
-http.globalAgent.maxSockets = 100;
+http.globalAgent.maxSockets = Infinity;
 
 module.exports = function(tilelive, options) {
   var HttpSource = function(uri, callback) {
