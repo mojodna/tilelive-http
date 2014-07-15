@@ -7,16 +7,42 @@ var version = require("./package.json").version;
 
 http.globalAgent.maxSockets = Infinity;
 
+var quadKey = function(zoom, x, y) {
+  var quadKey = "";
+  for (var i = zoom; i > 0; i--) {
+    var digit = "0";
+    var mask = 1 << (i - 1);
+    if ((x & mask) !== 0) {
+      digit++;
+    }
+    if ((y & mask) !== 0) {
+      digit++;
+      digit++;
+    }
+    quadKey += digit;
+  }
+
+  return quadKey;
+};
+
 module.exports = function(tilelive, options) {
   var HttpSource = function(uri, callback) {
     this.source = url.format(uri);
 
     if (!(this.source.match(/{z}/) &&
         this.source.match(/{x}/) &&
-        this.source.match(/{y}/))) {
+        this.source.match(/{y}/)) &&
+       !this.source.match(/{q}/)) {
       console.log("Coordinate placeholders missing; assuming %s is a TileJSON endpoint (tilejson+).", this.source);
 
       return tilelive.load("tilejson+" + this.source, callback);
+    }
+
+    // save ourselves some math if we don't need to generate a quad key
+    if (this.source.match(/{q}/)) {
+      this.quadKey = quadKey;
+    } else {
+      this.quadKey = function() {};
     }
 
     return callback(null, this);
@@ -26,7 +52,8 @@ module.exports = function(tilelive, options) {
     var tileUrl = this.source
       .replace(/{z}/i, z)
       .replace(/{x}/i, x)
-      .replace(/{y}/i, y);
+      .replace(/{y}/i, y)
+      .replace(/{q}/i, this.quadKey(z, x, y));
 
     var headers = {
       "User-Agent": "tilelive-http/" + version
