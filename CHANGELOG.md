@@ -1,5 +1,9 @@
 # Changes
 
+## vNext
+
+* Report `autoscale: true`
+
 ## v0.4.0 - 7/25/14
 
 * `?scale` awareness; generates URLs with `@<scale>x`
