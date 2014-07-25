@@ -1,7 +1,8 @@
 # Changes
 
-## vNext
+## v0.4.0 - 7/25/14
 
+* `?scale` awareness; generates URLs with `@<scale>x`
 * Relax `tilelive` dependency
 * Add quadkey interpolation for `{q}`
 

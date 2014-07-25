@@ -40,6 +40,9 @@ module.exports = function(tilelive, options) {
       return tilelive.load("tilejson+" + this.source, callback);
     }
 
+    this.scale = uri.query.scale || 1;
+    this.tileSize = (uri.query.tileSize | 0) || 256;
+
     // save ourselves some math if we don't need to generate a quad key
     if (this.source.match(/{q}/)) {
       this.quadKey = quadKey;
@@ -56,6 +59,11 @@ module.exports = function(tilelive, options) {
       .replace(/{x}/i, x)
       .replace(/{y}/i, y)
       .replace(/{q}/i, this.quadKey(z, x, y));
+
+    if (this.scale > 1) {
+      // replace the last "." with "@<scale>x."
+      tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.")
+    }
 
     var headers = {
       "User-Agent": "tilelive-http/" + version
