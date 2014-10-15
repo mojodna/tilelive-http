@@ -1,7 +1,8 @@
 # Changes
 
-## vNext
+## v0.5.0 - 10/15/14
 
+* Relax `tilejson` dependency
 * Report `autoscale: true`
 
 ## v0.4.0 - 7/25/14
