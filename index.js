@@ -28,7 +28,7 @@ var quadKey = function(zoom, x, y) {
   return key;
 };
 
-module.exports = function(tilelive, options) {
+module.exports = function(tilelive) {
   var HttpSource = function(uri, callback) {
     this.source = url.format(uri);
 
@@ -112,9 +112,9 @@ module.exports = function(tilelive, options) {
     return callback();
   };
 
-  HttpSource.registerProtocols = function(tilelive) {
-    tilelive.protocols["http:"] = HttpSource;
-    tilelive.protocols["https:"] = HttpSource;
+  HttpSource.registerProtocols = function(_tilelive) {
+    _tilelive.protocols["http:"] = HttpSource;
+    _tilelive.protocols["https:"] = HttpSource;
   };
 
   HttpSource.registerProtocols(tilelive);
