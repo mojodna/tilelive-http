@@ -3,7 +3,8 @@
 var http = require("http"),
     url = require("url");
 
-var request = require("request");
+var request = require("request"),
+    retry = require("retry");
 
 var version = require("./package.json").version;
 
@@ -26,6 +27,49 @@ var quadKey = function(zoom, x, y) {
   }
 
   return key;
+};
+
+var fetch = function(uri, headers, callback) {
+  var operation = retry.operation({
+    retries: 3,
+    minTimeout: 100,
+    maxTimeout: 60e3, // 1 minute
+    factor: 54.265
+  });
+
+  return operation.attempt(function() {
+    return request.get({
+      uri: uri,
+      encoding: null,
+      headers: headers,
+      timeout: 30e3
+    }, function(err, rsp, body) {
+      if (operation.retry(err)) {
+        return null;
+      }
+
+      if (err) {
+        return callback(operation.mainError());
+      }
+
+      switch (rsp.statusCode) {
+      case 200:
+      case 404:
+        return callback(null, rsp, body);
+
+      default:
+        err = new Error("Upstream error:" + rsp.statusCode);
+
+        if (rsp.statusCode.toString().slice(0, 1) !== "5") {
+          return callback(err);
+        }
+
+        if (!operation.retry(err)) {
+          return callback(operation.mainError(), rsp, body);
+        }
+      }
+    });
+  });
 };
 
 module.exports = function(tilelive) {
@@ -70,20 +114,20 @@ module.exports = function(tilelive) {
       "User-Agent": "tilelive-http/" + version
     };
 
-    return request.get({
-      uri: tileUrl,
-      encoding: null,
-      headers: headers
-    }, function(err, rsp, body) {
+    return fetch(tileUrl, headers, function(err, rsp, body) {
       if (err) {
         return callback(err);
       }
 
       switch (rsp.statusCode) {
       case 200:
-        var rspHeaders = {
-          "Content-Type": rsp.headers["content-type"]
-        };
+        var rspHeaders = ["content-type", "content-md5", "content-encoding"].reduce(function(obj, key) {
+          if (rsp.headers[key]) {
+            obj[key] = rsp.headers[key];
+          }
+
+          return obj;
+        }, {});
 
         return callback(null, body, rspHeaders);
 
