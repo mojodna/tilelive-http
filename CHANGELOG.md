@@ -3,6 +3,7 @@
 ## v0.6.0 - 4/14/15
 
 * Retry failed requests (internal errors or 5xx responses)
+* Downcase placeholder characters (for ModestMaps URL template compatibility)
 
 ## v0.5.0 - 10/15/14
 

@@ -74,7 +74,9 @@ var fetch = function(uri, headers, callback) {
 
 module.exports = function(tilelive) {
   var HttpSource = function(uri, callback) {
-    this.source = url.format(uri);
+    this.source = url.format(uri).replace(/(\{\w\})/g, function(x) {
+      return x.toLowerCase();
+    });
 
     if (!(this.source.match(/{z}/) &&
         this.source.match(/{x}/) &&
