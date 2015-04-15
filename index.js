@@ -10,7 +10,8 @@ var version = require("./package.json").version;
 http.globalAgent.maxSockets = Infinity;
 
 var quadKey = function(zoom, x, y) {
-  var quadKey = "";
+  var key = "";
+
   for (var i = zoom; i > 0; i--) {
     var digit = "0";
     var mask = 1 << (i - 1);
@@ -21,10 +22,10 @@ var quadKey = function(zoom, x, y) {
       digit++;
       digit++;
     }
-    quadKey += digit;
+    key += digit;
   }
 
-  return quadKey;
+  return key;
 };
 
 module.exports = function(tilelive, options) {
@@ -62,7 +63,7 @@ module.exports = function(tilelive, options) {
 
     if (this.scale > 1) {
       // replace the last "." with "@<scale>x."
-      tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.")
+      tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.");
     }
 
     var headers = {
@@ -87,7 +88,7 @@ module.exports = function(tilelive, options) {
         return callback(null, body, rspHeaders);
 
       case 404:
-        return callback(new Error('Tile does not exist'));
+        return callback(new Error("Tile does not exist"));
 
       default:
         return callback(new Error("Upstream error: " + rsp.statusCode));
