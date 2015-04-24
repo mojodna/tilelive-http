@@ -1,5 +1,9 @@
 # Changes
 
+## vNext
+
+* Treat 403 responses as fatal errors
+
 ## v0.6.0 - 4/14/15
 
 * Retry failed requests (internal errors or 5xx responses)

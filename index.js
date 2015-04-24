@@ -54,6 +54,7 @@ var fetch = function(uri, headers, callback) {
 
       switch (rsp.statusCode) {
       case 200:
+      case 403:
       case 404:
         return callback(null, rsp, body);
 
