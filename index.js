@@ -1,7 +1,8 @@
 "use strict";
 
 var http = require("http"),
-    url = require("url");
+    url = require("url"),
+    util = require("util");
 
 var request = require("request"),
     retry = require("retry");
@@ -61,7 +62,7 @@ var fetch = function(uri, headers, callback) {
         return callback(null, rsp, body);
 
       default:
-        err = new Error("Upstream error:" + rsp.statusCode);
+        err = new Error(util.format("Upstream error: %s returned %d", uri, rsp.statusCode));
 
         if (rsp.statusCode.toString().slice(0, 1) !== "5") {
           return callback(err);
