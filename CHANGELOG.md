@@ -4,6 +4,7 @@
 
 * Treat 403 responses as fatal errors
 * Include problematic URLs in error messages
+* Set `maxSockets` according to `options.concurrency`
 
 ## v0.6.0 - 4/14/15
 

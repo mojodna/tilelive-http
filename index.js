@@ -11,8 +11,6 @@ var meta = require("./package.json"),
     NAME = meta.name,
     VERSION = meta.version;
 
-http.globalAgent.maxSockets = Infinity;
-
 var quadKey = function(zoom, x, y) {
   var key = "";
 
@@ -76,7 +74,12 @@ var fetch = function(uri, headers, callback) {
   });
 };
 
-module.exports = function(tilelive) {
+module.exports = function(tilelive, options) {
+  options = options || {};
+  options.concurrency = options.concurrency || 32;
+
+  http.globalAgent.maxSockets = 2 * options.concurrency;
+
   var HttpSource = function(uri, callback) {
     this.source = url.format(uri).replace(/(\{\w\})/g, function(x) {
       return x.toLowerCase();
