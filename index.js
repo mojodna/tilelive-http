@@ -6,7 +6,9 @@ var http = require("http"),
 var request = require("request"),
     retry = require("retry");
 
-var version = require("./package.json").version;
+var meta = require("./package.json"),
+    NAME = meta.name,
+    VERSION = meta.version;
 
 http.globalAgent.maxSockets = Infinity;
 
@@ -114,7 +116,7 @@ module.exports = function(tilelive) {
     }
 
     var headers = {
-      "User-Agent": "tilelive-http/" + version
+      "User-Agent": [NAME, VERSION].join("/")
     };
 
     return fetch(tileUrl, headers, function(err, rsp, body) {
