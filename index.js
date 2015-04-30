@@ -31,12 +31,7 @@ var quadKey = function(zoom, x, y) {
 };
 
 var fetch = function(uri, headers, callback) {
-  var operation = retry.operation({
-    retries: 3,
-    minTimeout: 100,
-    maxTimeout: 60e3, // 1 minute
-    factor: 54.265
-  });
+  var operation = retry.operation();
 
   return operation.attempt(function() {
     return request.get({

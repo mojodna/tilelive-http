@@ -1,10 +1,11 @@
 # Changes
 
-## vNext
+## v0.6.1 - 4/30/15
 
 * Treat 403 responses as fatal errors
 * Include problematic URLs in error messages
 * Set `maxSockets` according to `options.concurrency`
+* Revert to `retry` defaults; better behavior with problematic sources
 
 ## v0.6.0 - 4/14/15
 
