@@ -1,5 +1,9 @@
 # Changes
 
+## v0.7.0 - 5/9/15
+
+* Make retries optional (`options.retry`, defaulting to `false`)
+
 ## v0.6.1 - 4/30/15
 
 * Treat 403 responses as fatal errors

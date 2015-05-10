@@ -30,50 +30,60 @@ var quadKey = function(zoom, x, y) {
   return key;
 };
 
-var fetch = function(uri, headers, callback) {
-  var operation = retry.operation();
-
-  return operation.attempt(function() {
-    return request.get({
-      uri: uri,
-      encoding: null,
-      headers: headers,
-      timeout: 30e3
-    }, function(err, rsp, body) {
-      if (operation.retry(err)) {
-        return null;
-      }
-
-      if (err) {
-        return callback(operation.mainError());
-      }
-
-      switch (rsp.statusCode) {
-      case 200:
-      case 403:
-      case 404:
-        return callback(null, rsp, body);
-
-      default:
-        err = new Error(util.format("Upstream error: %s returned %d", uri, rsp.statusCode));
-
-        if (rsp.statusCode.toString().slice(0, 1) !== "5") {
-          return callback(err);
-        }
-
-        if (!operation.retry(err)) {
-          return callback(operation.mainError(), rsp, body);
-        }
-      }
-    });
-  });
-};
-
 module.exports = function(tilelive, options) {
   options = options || {};
   options.concurrency = options.concurrency || 32;
+  options.retry = "retry" in options ? options.retry : false;
 
   http.globalAgent.maxSockets = 2 * options.concurrency;
+
+  var headers = {
+        "User-Agent": [NAME, VERSION].join("/")
+      },
+      retryOptions = {};
+
+  if (!options.retry) {
+    retryOptions.retries = 0;
+  }
+
+  var fetch = function(uri, callback) {
+    var operation = retry.operation(retryOptions);
+
+    return operation.attempt(function() {
+      return request.get({
+        uri: uri,
+        encoding: null,
+        headers: headers,
+        timeout: 30e3
+      }, function(err, rsp, body) {
+        if (operation.retry(err)) {
+          return null;
+        }
+
+        if (err) {
+          return callback(operation.mainError());
+        }
+
+        switch (rsp.statusCode) {
+        case 200:
+        case 403:
+        case 404:
+          return callback(null, rsp, body);
+
+        default:
+          err = new Error(util.format("Upstream error: %s returned %d", uri, rsp.statusCode));
+
+          if (rsp.statusCode.toString().slice(0, 1) !== "5") {
+            return callback(err);
+          }
+
+          if (!operation.retry(err)) {
+            return callback(operation.mainError(), rsp, body);
+          }
+        }
+      });
+    });
+  };
 
   var HttpSource = function(uri, callback) {
     this.source = url.format(uri).replace(/(\{\w\})/g, function(x) {
@@ -114,11 +124,7 @@ module.exports = function(tilelive, options) {
       tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.");
     }
 
-    var headers = {
-      "User-Agent": [NAME, VERSION].join("/")
-    };
-
-    return fetch(tileUrl, headers, function(err, rsp, body) {
+    return fetch(tileUrl, function(err, rsp, body) {
       if (err) {
         return callback(err);
       }
