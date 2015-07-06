@@ -1,5 +1,10 @@
 # Changes
 
+## v0.8.0 - 6/6/15
+
+* Version-specific workaround for joyent/node#25636 / nodejs/io.js#2113
+  (breaking change in `url.parse` behavior)
+
 ## v0.7.0 - 5/9/15
 
 * Make retries optional (`options.retry`, defaulting to `false`)

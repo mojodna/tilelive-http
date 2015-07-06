@@ -5,7 +5,8 @@ var http = require("http"),
     util = require("util");
 
 var request = require("request"),
-    retry = require("retry");
+    retry = require("retry"),
+    semver = require("semver");
 
 var meta = require("./package.json"),
     NAME = meta.name,
@@ -86,6 +87,15 @@ module.exports = function(tilelive, options) {
   };
 
   var HttpSource = function(uri, callback) {
+    if (semver.satisfies(process.version, ">=0.11.0")) {
+      // Node 0.12 changes the behavior of url.parse such that components are
+      // url-encoded
+      uri.hash = decodeURIComponent(uri.hash);
+      uri.pathname = decodeURIComponent(uri.pathname);
+      uri.path = decodeURIComponent(uri.path);
+      uri.href = decodeURIComponent(uri.href);
+    }
+
     this.source = url.format(uri).replace(/(\{\w\})/g, function(x) {
       return x.toLowerCase();
     });
