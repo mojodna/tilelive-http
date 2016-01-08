@@ -6,6 +6,7 @@
   "author": "Seth Fitzsimmons <seth@mojodna.net>",
   "license": "MIT",
   "dependencies": {
+    "debug": "^2.2.0",
     "request": "^2.34.0",
     "retry": "^0.6.1",
     "semver": "^4.3.6"

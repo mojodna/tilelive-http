@@ -1,5 +1,10 @@
 # Changes
 
+## v0.9.0 - 1/7/16
+
+* Use `debug` for debugging. Set `DEBUG=tilelive-http` in the environment to
+  enable.
+
 ## v0.8.0 - 6/6/15
 
 * Version-specific workaround for joyent/node#25636 / nodejs/io.js#2113

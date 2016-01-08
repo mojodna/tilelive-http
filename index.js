@@ -4,13 +4,15 @@ var http = require("http"),
     url = require("url"),
     util = require("util");
 
-var request = require("request"),
+var _debug = require("debug"),
+    request = require("request"),
     retry = require("retry"),
     semver = require("semver");
 
 var meta = require("./package.json"),
     NAME = meta.name,
-    VERSION = meta.version;
+    VERSION = meta.version,
+    debug = _debug(NAME);
 
 var quadKey = function(zoom, x, y) {
   var key = "";
@@ -50,7 +52,7 @@ module.exports = function(tilelive, options) {
   var fetch = function(uri, callback) {
     var operation = retry.operation(retryOptions);
 
-    return operation.attempt(function() {
+    return operation.attempt(function(currentAttempt) {
       return request.get({
         uri: uri,
         encoding: null,
@@ -58,7 +60,10 @@ module.exports = function(tilelive, options) {
         timeout: 30e3
       }, function(err, rsp, body) {
         if (operation.retry(err)) {
-          return null;
+          debug("Failed %s after %d attempts:", url.format(uri), currentAttempt, err);
+
+          // retrying, callback will eventually be called
+          return;
         }
 
         if (err) {
@@ -80,6 +85,8 @@ module.exports = function(tilelive, options) {
 
           if (!operation.retry(err)) {
             return callback(operation.mainError(), rsp, body);
+          } else {
+            debug("Failed %s after %d attempts:", url.format(uri), currentAttempt, err);
           }
         }
       });
