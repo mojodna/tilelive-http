@@ -90,7 +90,7 @@ module.exports = function(tilelive, options) {
     if (semver.satisfies(process.version, ">=0.11.0")) {
       // Node 0.12 changes the behavior of url.parse such that components are
       // url-encoded
-      uri.hash = decodeURIComponent(uri.hash);
+      uri.hash = uri.hash && decodeURIComponent(uri.hash);
       uri.pathname = decodeURIComponent(uri.pathname);
       uri.path = decodeURIComponent(uri.path);
       uri.href = decodeURIComponent(uri.href);
