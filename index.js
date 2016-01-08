@@ -43,7 +43,9 @@ module.exports = function(tilelive, options) {
   var headers = {
         "User-Agent": [NAME, VERSION].join("/")
       },
-      retryOptions = {};
+      retryOptions = {
+        factor: 1.71023
+      };
 
   if (!options.retry) {
     retryOptions.retries = 0;

@@ -4,6 +4,7 @@
 
 * Use `debug` for debugging. Set `DEBUG=tilelive-http` in the environment to
   enable.
+* Reduce retry factor for a total waiting time of 5 minutes per tile.
 
 ## v0.8.0 - 6/6/15
 
