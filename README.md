@@ -31,3 +31,7 @@ copyTask.on("finished", function() {
   console.log("Done!");
 });
 ```
+
+## Environment Variables
+
+* `TILELIVE_USER_AGENT` - `User-Agent` header when making upstream requests

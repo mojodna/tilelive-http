@@ -1,5 +1,10 @@
 # Changes
 
+## v0.10.0 - 2/22/16
+
+* Support setting `User-Agent` header via `options.userAgent` /
+  `TILELIVE_USER_AGENT`.
+
 ## v0.9.0 - 1/7/16
 
 * Use `debug` for debugging. Set `DEBUG=tilelive-http` in the environment to
