@@ -1,5 +1,9 @@
 # Changes
 
+## v0.10.1 - 7/6/16
+
+* Pass `cache-control` headers through
+
 ## v0.10.0 - 2/22/16
 
 * Support setting `User-Agent` header via `options.userAgent` /

@@ -151,7 +151,7 @@ module.exports = function(tilelive, options) {
 
       switch (rsp.statusCode) {
       case 200:
-        var rspHeaders = ["content-type", "content-md5", "content-encoding"].reduce(function(obj, key) {
+        var rspHeaders = ["cache-control", "content-type", "content-md5", "content-encoding"].reduce(function(obj, key) {
           if (rsp.headers[key]) {
             obj[key] = rsp.headers[key];
           }
