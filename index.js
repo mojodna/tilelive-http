@@ -148,7 +148,7 @@ module.exports = function(tilelive, options) {
       .replace(/{y}/i, y)
       .replace(/{q}/i, this.quadKey(z, x, y));
 
-    if (this.scale > 1) {
+    if (this.scale > 1 && this.info.autoscale) {
       // replace the last "." with "@<scale>x."
       tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.");
     }
