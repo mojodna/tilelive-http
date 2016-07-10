@@ -1,5 +1,9 @@
 # Changes
 
+## v0.11.1 - 7/10/16
+
+* Typo fixes
+
 ## v0.11.0 - 7/10/16
 
 * Allow `info` to be specified on the `uri` object

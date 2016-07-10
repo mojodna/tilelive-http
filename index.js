@@ -130,10 +130,10 @@ module.exports = function(tilelive, options) {
     // abuse the URI object by looking for .info directly on it
     this.info = uri.info || {};
 
-    this.info.autoscale = ? "autoscale" in this.info ? this.info.autoscale : true;
+    this.info.autoscale = "autoscale" in this.info ? this.info.autoscale : true;
     this.info.bounds = this.info.bounds || [-180, -85.0511, 180, 85.0511];
-    this.info.minzoom = ? "minzoom" in this.info ? this.info.minzoom : 0;
-    this.info.maxzoom = ? "maxzoom" in this.info ? this.info.maxzoom : Infinity;
+    this.info.minzoom = "minzoom" in this.info ? this.info.minzoom : 0;
+    this.info.maxzoom = "maxzoom" in this.info ? this.info.maxzoom : Infinity;
 
     return callback(null, this);
   };
