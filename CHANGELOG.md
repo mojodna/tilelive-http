@@ -6,6 +6,7 @@
 * Limit requests to bounds / zoom range specified in `info`
 * Respect `info.autoscale` (defaults to `true`)
 * Update dependencies
+* Drop `options.concurrency` now that `maxSockets` defaults to `Infinity` (Node-0.12+)
 
 ## v0.10.1 - 7/6/16
 
