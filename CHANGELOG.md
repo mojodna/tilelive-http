@@ -3,6 +3,7 @@
 ## v0.11.0 - 7/10/16
 
 * Allow `info` to be specified on the `uri` object
+* Limit requests to bounds / zoom range specified in `info`
 
 ## v0.10.1 - 7/6/16
 

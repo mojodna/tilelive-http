@@ -5,6 +5,7 @@ var http = require("http"),
     util = require("util");
 
 var _debug = require("debug"),
+    mercator = new (require("sphericalmercator"))(),
     request = require("request"),
     retry = require("retry"),
     semver = require("semver");
@@ -150,6 +151,19 @@ module.exports = function(tilelive, options) {
     if (this.scale > 1) {
       // replace the last "." with "@<scale>x."
       tileUrl = tileUrl.replace(/\.(?!.*\.)/, "@" + this.scale + "x.");
+    }
+
+    if (z < this.info.minzoom || z > this.info.maxzoom) {
+      return callback(new Error("Tile does not exist"));
+    }
+
+    var xyz = mercator.xyz(this.info.bounds, z);
+
+    if (x < xyz.minX ||
+        x > xyz.maxX ||
+        y < xyz.minY ||
+        y > xyz.maxY) {
+      return callback(new Error("Tile does not exist"));
     }
 
     return fetch(tileUrl, function(err, rsp, body) {
