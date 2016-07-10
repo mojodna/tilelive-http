@@ -129,6 +129,14 @@ module.exports = function(tilelive, options) {
       this.quadKey = function() {};
     }
 
+    // abuse the URI object by looking for .info directly on it
+    this.info = uri.info || {};
+
+    this.info.autoscale = ? "autoscale" in this.info ? this.info.autoscale : true;
+    this.info.bounds = this.info.bounds || [-180, -85.0511, 180, 85.0511];
+    this.info.minzoom = ? "minzoom" in this.info ? this.info.minzoom : 0;
+    this.info.maxzoom = ? "maxzoom" in this.info ? this.info.maxzoom : Infinity;
+
     return callback(null, this);
   };
 
@@ -171,13 +179,7 @@ module.exports = function(tilelive, options) {
   };
 
   HttpSource.prototype.getInfo = function(callback) {
-    return callback(null, {
-      format: url.parse(this.source).pathname.split(".").pop(),
-      bounds: [-180, -85.0511, 180, 85.0511],
-      minzoom: 0,
-      maxzoom: Infinity,
-      autoscale: true
-    });
+    return setImmediate(callback, null, this.info);
   };
 
   HttpSource.prototype.close = function(callback) {
