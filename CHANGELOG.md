@@ -5,6 +5,7 @@
 * Allow `info` to be specified on the `uri` object
 * Limit requests to bounds / zoom range specified in `info`
 * Respect `info.autoscale` (defaults to `true`)
+* Update dependencies
 
 ## v0.10.1 - 7/6/16
 
