@@ -37,8 +37,8 @@ var quadKey = function(zoom, x, y) {
 module.exports = function(tilelive, options) {
   options = options || {};
   options.concurrency = options.concurrency || 32;
-  options.userAgent = options.userAgent || process.env.TILELIVE_USER_AGENT || [NAME, VERSION].join("/");
   options.retry = "retry" in options ? options.retry : false;
+  options.userAgent = options.userAgent || process.env.TILELIVE_USER_AGENT || [NAME, VERSION].join("/");
 
   http.globalAgent.maxSockets = 2 * options.concurrency;
 
