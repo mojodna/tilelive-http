@@ -1,5 +1,9 @@
 # Changes
 
+## v0.11.2 - 7/14/16
+
+* Request `gzip` `Content-Encoding` to trigger appropriate response headers
+
 ## v0.11.1 - 7/10/16
 
 * Typo fixes
