@@ -58,7 +58,8 @@ module.exports = function(tilelive, options) {
         uri: uri,
         encoding: null,
         headers: headers,
-        timeout: 30e3
+        timeout: 30e3,
+        gzip: true
       }, function(err, rsp, body) {
         if (operation.retry(err)) {
           debug("Failed %s after %d attempts:", url.format(uri), currentAttempt, err);
