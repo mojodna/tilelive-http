@@ -1,5 +1,10 @@
 # Changes
 
+## v0.11.3 - 7/24/16
+
+* Revert explicit request for `gzip`ed content, as MVT PBFs are intended to be
+  compressed at rest.
+
 ## v0.11.2 - 7/14/16
 
 * Request `gzip` `Content-Encoding` to trigger appropriate response headers
