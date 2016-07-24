@@ -35,3 +35,7 @@ copyTask.on("finished", function() {
 ## Environment Variables
 
 * `TILELIVE_USER_AGENT` - `User-Agent` header when making upstream requests
+
+## Gotchas
+
+Vector tiles are gzipped at rest. They are served with Content-Encoding: gzip for transport, but by default `tilelive-http` does not automatically decompress them. See [mojodna/tilelive-http#13](https://github.com/mojodna/tilelive-http/pull/13) and [mapbox/vector-tile-spec#27 (comment)](https://github.com/mapbox/vector-tile-spec/issues/27#issuecomment-66670565) for more details.
