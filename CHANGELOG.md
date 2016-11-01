@@ -1,5 +1,11 @@
 # Changes
 
+## v0.13.0 - 9/29/17
+
+* Add `Accept-encoding: gzip, deflate` as the default with
+  `option.acceptEncoding` to override it. This facilitates accessing correctly
+  configured MVT services like maps.wikimedia.org
+
 ## v0.12.2 - 6/14/17
 
 * Fix dependency `require`s

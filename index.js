@@ -38,9 +38,11 @@ module.exports = function(tilelive, options) {
   options = options || {};
   options.retry = "retry" in options ? options.retry : false;
   options.userAgent = options.userAgent || process.env.TILELIVE_USER_AGENT || [NAME, VERSION].join("/");
+  options.acceptEncoding = options.acceptEncoding || 'gzip, deflate';
 
   var headers = {
-        "User-Agent": options.userAgent
+        "User-Agent": options.userAgent,
+        "Accept-encoding": options.acceptEncoding
       },
       retryOptions = {
         factor: 1.71023
