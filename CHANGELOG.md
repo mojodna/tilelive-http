@@ -1,5 +1,10 @@
 # Changes
 
+## v0.12.0 - 11/01/16
+
+* Add "Accept-encoding: gzip, deflate" as the default header, and the option.acceptEncoding
+  to override it. This supports correctly configured MVT services like maps.wikimedia.org
+
 ## v0.11.3 - 7/24/16
 
 * Revert explicit request for `gzip`ed content, as MVT PBFs are intended to be
