@@ -1,9 +1,12 @@
 {
-  "name": "tilelive-http",
+  "name": "@kartotherian/tilelive-http",
   "version": "0.12.0",
-  "description": "HTTP source for tilelive",
+  "description": "HTTP source for tilelive - with Kartotherian header compression customizations",
   "main": "index.js",
   "author": "Seth Fitzsimmons <seth@mojodna.net>",
+  "contributors": [
+    "Yuri Astrakhan <YuriAstrakhan@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "debug": "^2.2.0",
@@ -16,11 +19,11 @@
     "tilelive": "*",
     "tilejson": ">= 0.6.4"
   },
-  "homepage": "https://github.com/mojodna/tilelive-http",
-  "bugs": "https://github.com/mojodna/tilelive-http/issues",
+  "homepage": "https://github.com/kartotherian/tilelive-http",
+  "bugs": "https://github.com/kartotherian/tilelive-http/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mojodna/tilelive-http"
+    "url": "https://github.com/kartotherian/tilelive-http"
   },
   "files": [
     "index.js"
