@@ -1,5 +1,9 @@
 # Changes
 
+## v0.12.0 - 6/13/17
+
+* Update dependencies
+
 ## v0.11.2 - 7/14/16
 
 * Request `gzip` `Content-Encoding` to trigger appropriate response headers
