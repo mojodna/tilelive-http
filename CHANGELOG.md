@@ -1,5 +1,9 @@
 # Changes
 
+## v0.12.1 - 6/13/17
+
+* Re-released with fixes from v0.11.3
+
 ## v0.12.0 - 6/13/17
 
 * Update dependencies
