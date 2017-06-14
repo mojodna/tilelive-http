@@ -5,9 +5,9 @@ I am an HTTP source for [tilelive](https://github.com/mapbox/tilelive.js).
 ## Usage
 
 ```javascript
-var tilelive = require("tilelive");
+var tilelive = require("@mapbox/tilelive");
 require("tilelive-http")(tilelive);
-require("mbtiles").registerProtocols(tilelive);
+require("@mapbox/mbtiles").registerProtocols(tilelive);
 
 var template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg";
 

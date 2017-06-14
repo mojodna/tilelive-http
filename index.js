@@ -5,7 +5,7 @@ var http = require("http"),
     util = require("util");
 
 var _debug = require("debug"),
-    mercator = new (require("sphericalmercator"))(),
+    mercator = new (require("@mapbox/sphericalmercator"))(),
     request = require("request"),
     retry = require("retry"),
     semver = require("semver");

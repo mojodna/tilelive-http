@@ -1,8 +1,8 @@
 "use strict";
 
-var tilelive = require("tilelive");
+var tilelive = require("@mapbox/tilelive");
 require("./").registerProtocols(tilelive);
-require("mbtiles").registerProtocols(tilelive);
+require("@mapbox/mbtiles").registerProtocols(tilelive);
 
 var template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg";
 
