@@ -1,5 +1,9 @@
 # Changes
 
+## v0.12.0 - 6/13/17
+
+* Update dependencies
+
 ## v0.11.3 - 7/24/16
 
 * Revert explicit request for `gzip`ed content, as MVT PBFs are intended to be
