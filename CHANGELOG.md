@@ -1,5 +1,9 @@
 # Changes
 
+## v0.14.0 - 11/24/17
+
+* Track `Age`, `Date`, and `Expires` HTTP headers to facilitate invalidation.
+
 ## v0.13.0 - 9/29/17
 
 * Add `Accept-encoding: gzip, deflate` as the default with
